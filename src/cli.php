@@ -5,12 +5,14 @@
  */
 require __DIR__ . '/../vendor/autoload.php';
 
+use antarus66\BAHomework3\Application
 use antarus66\BAHomework3\Commands\MakeCoffee;
 use antarus66\BAHomework3\Commands\AddRecipe;
 use antarus66\BAHomework3\Commands\ShowHelp;
 use antarus66\BAHomework3\Recipe\Components\Creators\ComponentCreator;
 use antarus66\BAHomework3\Recipe\RecipeBuilder;
 use antarus66\BAHomework3\Recipe\Repositories\LocalRecipesRepository;
+use antarus66\BAHomework3\Recipe\Components\Creators\IngredientCreator;
 
 $container = new Pimple\Container();
 
@@ -27,7 +29,7 @@ $container['help_command_handler'] = function ($c) {
 $container['make-coffee_command_handler'] = function ($c) {
     return new $c['routes']['make-coffee'](
         $c['recipes_repository'],
-        new \antarus66\BAHomework3\Recipe\Components\Creators\IngredientCreator()
+        new IngredientCreator()
     );
 };
 
@@ -70,5 +72,5 @@ $container['recipe_builder'] = function ($c) {
 };
 
 
-$application = new \antarus66\BAHomework3\Application($container);
+$application = new Application($container);
 $application->start();

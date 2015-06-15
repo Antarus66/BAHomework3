@@ -2,5 +2,5 @@
 
 namespace antarus66\BAHomework3\Exceptions;
 
-class CommandException extends \RuntimeException
+class RepositoryException extends \RuntimeException
 {}

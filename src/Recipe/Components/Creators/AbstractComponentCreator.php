@@ -15,40 +15,31 @@ abstract class AbstractComponentCreator
 {
     abstract public function makeComponent($type);
 
+    protected $allowed_ingredient_types = [
+        'chocolate'     => Chocolate::class,
+        'coffee'        => Coffee::class,
+        'milk'          => Milk::class,
+        'sugar'         => Sugar::class,
+        'water'         => Water::class,
+        'whipped_cream' => WhippedCream::class,
+        'whipped_milk'  => WhippedMilk::class,
+        'whiskey'       => Whiskey::class,
+    ];
+
     /*
      * Creates a new simple Ingredient of Recipe by string type.
      * We can use it for creating Recipes with only one nesting level.
      */
     protected function makeIngredient($type)
     {
-        switch (strtolower($type)) {
-            case 'chocholate':
-                return new Chocolate();
-                break;
-            case 'coffee':
-                return new Coffee();
-                break;
-            case 'milk':
-                return new Milk();
-                break;
-            case 'sugar':
-                return new Sugar();
-                break;
-            case 'water':
-                return new Water();
-                break;
-            case 'whipped_cream':
-                return new WhippedCream();
-                break;
-            case 'whipped_milk':
-                return new WhippedMilk();
-                break;
-            case 'whiskey':
-                return new Whiskey();
-                break;
-            default:
-                throw new \InvalidArgumentException("Incompatible ingredient: '$type'!");
-                break;
+        if (array_key_exists($type, $this->allowed_ingredient_types)) {
+            return new $this->allowed_ingredient_types[$type]();
+        } else {
+            $available_ingredients = implode(', ', array_keys($this->allowed_ingredient_types));
+            throw new \InvalidArgumentException("Incompatible ingredient: '$type'!"
+                . PHP_EOL
+                . "Available ingredients: $available_ingredients.");
         }
     }
+
 }

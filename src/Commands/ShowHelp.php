@@ -12,16 +12,27 @@ class ShowHelp extends Command
 
     public function execute($options, $parameters)
     {
-        fwrite(STDOUT, 'You can use next commands:' . PHP_EOL);
-        foreach ($this->routes as $k=>$v) {
-            fwrite(STDOUT, "  $k - {$v::getDescription()}");
+        if (count($parameters) > 0) {
+            $operation = $parameters[0];
+            $operation_handler_class = $this->routes[$operation];
+            fwrite(STDOUT, $operation_handler_class::getHelp());
+        } else {
+            fwrite(STDOUT, 'The following commands are available:' . PHP_EOL);
+            foreach ($this->routes as $k=>$v) {
+                fwrite(STDOUT, "    {$v::getDescription()}");
+            }
         }
         fwrite(STDOUT, PHP_EOL);
-
     }
 
     public static function getDescription()
     {
-        return 'Returns this manual.' . PHP_EOL;
+        return 'help - Returns commands manual or help of determined function.' . PHP_EOL;
+    }
+
+    public static function getHelp() {
+        return self::getDescription()
+        . '    Syntax:  help [command]' . PHP_EOL
+        . '    Example: help make-coffee' . PHP_EOL;
     }
 }

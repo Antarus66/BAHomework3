@@ -5,29 +5,33 @@
  */
 require __DIR__ . '/../vendor/autoload.php';
 
+use antarus66\BAHomework3\Application;
 use antarus66\BAHomework3\Commands\MakeCoffee;
 use antarus66\BAHomework3\Commands\AddRecipe;
 use antarus66\BAHomework3\Commands\ShowHelp;
+use antarus66\BAHomework3\Commands\ExitProgramm;
 use antarus66\BAHomework3\Recipe\Components\Creators\ComponentCreator;
 use antarus66\BAHomework3\Recipe\RecipeBuilder;
 use antarus66\BAHomework3\Recipe\Repositories\LocalRecipesRepository;
+use antarus66\BAHomework3\Recipe\Components\Creators\IngredientCreator;
 
 $container = new Pimple\Container();
 
 $container['routes'] = [
     'make-coffee' => MakeCoffee::class,
-    'add-recipe' => AddRecipe::class,
-    'help' => ShowHelp::class,
+    'add-recipe'  => AddRecipe::class,
+    'help'        => ShowHelp::class,
+    'exit'        => ExitProgramm::class,
 ];
 
 $container['help_command_handler'] = function ($c) {
-    return new ShowHelp($c['routes']);
+    return new $c['routes']['help']($c['routes']);
 };
 
 $container['make-coffee_command_handler'] = function ($c) {
     return new $c['routes']['make-coffee'](
         $c['recipes_repository'],
-        new \antarus66\BAHomework3\Recipe\Components\Creators\IngredientCreator()
+        new IngredientCreator()
     );
 };
 
@@ -36,6 +40,10 @@ $container['add-recipe_command_handler'] = function ($c) {
         $c['recipe_builder'],
         $c['recipes_repository']
     );
+};
+
+$container['exit_command_handler'] = function ($c) {
+    return new $c['routes']['exit']();
 };
 
 $container['default_recipes'] = [
@@ -70,5 +78,5 @@ $container['recipe_builder'] = function ($c) {
 };
 
 
-$application = new \antarus66\BAHomework3\Application($container);
+$application = new Application($container);
 $application->start();

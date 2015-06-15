@@ -3,6 +3,7 @@
 namespace antarus66\BAHomework3;
 
 use antarus66\BAHomework3\Exceptions\CLIException;
+use antarus66\BAHomework3\Exceptions\CommandException;
 
 class Application
 {
@@ -17,7 +18,9 @@ class Application
 
     public function start()
     {
+        fwrite(STDOUT, "CoffeeMachine programm." . PHP_EOL);
         $this->route('help');
+
         // REPL cycle
         while (true) {
             fwrite(STDOUT, 'coffeemaker> ');
@@ -32,7 +35,7 @@ class Application
 
     public function handleCommandString($command_string)
     {
-        $command_array = array_map('trim', explode(" ", $command_string));
+        $command_array = array_map('trim', explode(" ", trim($command_string)));
         $command = null;
         $options = [];
         $params = [];
@@ -42,29 +45,31 @@ class Application
 
             if ($i === 0 && $el != null && substr($el, 0, 1) !== '-') {
                 $command = $el;
-                continue;
-            }
-
-            if (substr($el, 0, 2) === '--') {
+            } elseif (substr($el, 0, 2) === '--') {
                 $options[] = substr($el, 2);
             } else {
                 $params[] = $el;
             }
         }
 
-        if ($command == null) {
-            throw new CLIException('Command is not detected!');
-        }
-
         $this->route($command, $options, $params);
     }
 
     public function route($command, $options=null, $parameters=null) {
+        if ($command == null) {
+            throw new CLIException('Command is not detected!');
+        }
+
         if (!array_key_exists($command, $this->routes)) {
             throw new CLIException('Unknown command!');
         }
 
         $command_handler = $this->di_container[$command . '_command_handler'];
-        $command_handler->execute($options, $parameters);
+        try {
+            $command_handler->execute($options, $parameters);
+        } catch (CommandException $e) {
+            fwrite(STDERR, $e->getMessage() . PHP_EOL);
+            $this->route('help', null, [$command]);
+        }
     }
 }

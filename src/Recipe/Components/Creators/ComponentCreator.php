@@ -2,6 +2,7 @@
 
 namespace antarus66\BAHomework3\Recipe\Components\Creators;
 
+use antarus66\BAHomework3\Exceptions\RepositoryException;
 use antarus66\BAHomework3\Recipe\Recipe;
 
 class ComponentCreator extends AbstractComponentCreator
@@ -22,12 +23,13 @@ class ComponentCreator extends AbstractComponentCreator
         try {
             return $this->makeIngredient($type);
         } catch (\InvalidArgumentException $e) {
-            $recipe = $this->recipe_repository->getRecipe($type);
-            if ($recipe !== null) {
-                return $recipe;
-            } else {
+            try {
+                $recipe = $this->recipe_repository->getRecipe($type);
+            } catch (RepositoryException $e) {
                 throw new \InvalidArgumentException("Incompatible component: '$type'!");
             }
+
+            return $recipe;
         }
     }
 }

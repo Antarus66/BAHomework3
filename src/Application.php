@@ -18,6 +18,8 @@ class Application
 
     public function start()
     {
+        $this->init();
+
         fwrite(STDOUT, "CoffeeMachine programm." . PHP_EOL);
         $this->route('help');
 
@@ -33,7 +35,7 @@ class Application
         }
     }
 
-    public function handleCommandString($command_string)
+    private function handleCommandString($command_string)
     {
         $command_array = array_map('trim', explode(" ", trim($command_string)));
         $command = null;
@@ -55,7 +57,7 @@ class Application
         $this->route($command, $options, $params);
     }
 
-    public function route($command, $options=null, $parameters=null) {
+    private function route($command, $options=null, $parameters=null) {
         if ($command == null) {
             throw new CLIException('Command is not detected!');
         }
@@ -70,6 +72,23 @@ class Application
         } catch (CommandException $e) {
             fwrite(STDERR, $e->getMessage() . PHP_EOL);
             $this->route('help', null, [$command]);
+        }
+    }
+
+    /*
+     * If we'll initialize the recipe_repository throw
+     * $di_container->extend('recipes_repository', function ($repository, $c) {...}
+     * there will be a recursive cycle because we need a recipe_repository copy to init a recipe_builder.
+     * Next time di_container will return the same copy (by default in Pimple 3.0)
+     */
+    private function init()
+    {
+        $recipe_builder = $this->di_container['recipe_builder'];
+        $recipe_repository =  $this->di_container['recipes_repository'];
+
+        foreach ($this->di_container['default_recipes'] as $name => $component_name_list) {
+            $new_rec = $recipe_builder->makeRecipe($name, $component_name_list);
+           $recipe_repository->addRecipe($new_rec);
         }
     }
 }

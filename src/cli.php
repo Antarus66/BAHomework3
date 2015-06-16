@@ -57,16 +57,6 @@ $container['recipes_repository'] = function ($c) {
     return new LocalRecipesRepository();
 };
 
-$container->extend('recipes_repository', function ($repository, $c) {
-    $component_creator = new ComponentCreator($repository);
-    $recipe_builder = new RecipeBuilder($component_creator);
-    foreach ($c['default_recipes'] as $name => $component_name_list) {
-        $new_rec = $recipe_builder->makeRecipe($name, $component_name_list);
-        $repository->addRecipe($new_rec);
-    }
-    return $repository;
-});
-
 $container['component_creator'] = function ($c) {
     return new ComponentCreator($c['recipes_repository']);
 };

@@ -4,7 +4,7 @@ namespace antarus66\BAHomework3\Recipe\Repositories;
 
 use antarus66\BAHomework3\Exceptions\RepositoryException;
 
-class LocalRecipesRepository extends RecipesRepository
+class LocalRecipesRepository extends AbstractRecipesRepository
 {
     protected $recipes;
 

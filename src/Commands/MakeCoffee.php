@@ -4,14 +4,15 @@ namespace antarus66\BAHomework3\Commands;
 
 use antarus66\BAHomework3\CoffeeDrink;
 use antarus66\BAHomework3\Exceptions\CommandException;
-use antarus66\BAHomework3\Recipe\Repositories\RecipesRepository;
+use antarus66\BAHomework3\Exceptions\RepositoryException;
+use antarus66\BAHomework3\Recipe\Repositories\AbstractRecipesRepository;
 
 class MakeCoffee extends Command
 {
     protected $recipes_repository;
     protected $ingredient_creator;
 
-    public function __construct(RecipesRepository $recipes_repository,
+    public function __construct(AbstractRecipesRepository $recipes_repository,
                                 $ingredient_creator)
     {
         $this->recipes_repository = $recipes_repository;
@@ -30,7 +31,7 @@ class MakeCoffee extends Command
         // Getting the recipe for compare with users input
         try {
             $recipe = $this->recipes_repository->getRecipe($recipe_name);
-        } catch (\InvalidArgumentException $e) {
+        } catch (RepositoryException $e) {
             // Catching and rethrowing "no such recipe" exception;
             $avaliable_recipes = implode(', ', $this->recipes_repository->getRecipesNames());
             throw new CommandException('Recipe was not found. '

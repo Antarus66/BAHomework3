@@ -2,7 +2,7 @@
 
 namespace antarus66\BAHomework3\Recipe\Repositories;
 
-abstract class RecipesRepository
+abstract class AbstractRecipesRepository
 {
     abstract public function getRecipe($recipe_name);
     abstract public function addRecipe($recipe);

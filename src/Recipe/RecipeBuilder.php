@@ -2,11 +2,13 @@
 
 namespace antarus66\BAHomework3\Recipe;
 
- class RecipeBuilder
+ use antarus66\BAHomework3\Recipe\Components\Creators\AbstractComponentCreator;
+
+ class RecipeBuilder extends AbstractRecipeBuilder
  {
      protected $component_creator;
 
-     public function __construct($component_creator)
+     public function __construct(AbstractComponentCreator $component_creator)
      {
          $this->component_creator = $component_creator;
      }

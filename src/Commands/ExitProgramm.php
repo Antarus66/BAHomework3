@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: antarus66
- * Date: 6/15/15
- * Time: 3:44 AM
- */
 
 namespace antarus66\BAHomework3\Commands;
 
@@ -24,7 +18,6 @@ class ExitProgramm extends Command
     }
 
     public static function getHelp() {
-        return self::getDescription()
-        . '    Syntax:  exit' . PHP_EOL;
+        return self::getDescription() . '    Syntax:  exit' . PHP_EOL;
     }
 }

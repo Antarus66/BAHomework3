@@ -1,6 +1,6 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe\Components\Creators;
+namespace antarus66\BAHomework3\Models\Recipe\Components\Creators;
 
 class IngredientCreator extends AbstractComponentCreator
 {

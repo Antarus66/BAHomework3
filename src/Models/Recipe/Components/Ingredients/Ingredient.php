@@ -1,9 +1,9 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe\Components\Ingredients;
+namespace antarus66\BAHomework3\Models\Recipe\Components\Ingredients;
 
-use antarus66\BAHomework3\Recipe\Components\Ingredients;
-use antarus66\BAHomework3\Recipe\Components\RecipeComponent;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients;
+use antarus66\BAHomework3\Models\Recipe\Components\RecipeComponent;
 
 abstract class Ingredient implements RecipeComponent
 {

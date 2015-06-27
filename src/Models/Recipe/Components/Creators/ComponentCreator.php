@@ -1,10 +1,10 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe\Components\Creators;
+namespace antarus66\BAHomework3\Models\Recipe\Components\Creators;
 
 use antarus66\BAHomework3\Exceptions\RepositoryException;
-use antarus66\BAHomework3\Recipe\Recipe;
-use antarus66\BAHomework3\Recipe\Repositories\AbstractRecipesRepository;
+use antarus66\BAHomework3\Models\Recipe\Recipe;
+use antarus66\BAHomework3\Models\Recipe\Repositories\AbstractRecipesRepository;
 
 class ComponentCreator extends AbstractComponentCreator
 {

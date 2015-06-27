@@ -3,19 +3,24 @@
 /**
  * CoffeeMaker console bootstrap file.
  */
-require __DIR__ . '/../vendor/autoload.php';
 
-use antarus66\BAHomework3\Application;
+namespace antarus66\BAHomework3\App;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+use antarus66\BAHomework3\App\Application;
+use antarus66\BAHomework3\App\Configs\Config;
 use antarus66\BAHomework3\Commands\MakeCoffee;
 use antarus66\BAHomework3\Commands\AddRecipe;
 use antarus66\BAHomework3\Commands\ShowHelp;
 use antarus66\BAHomework3\Commands\ExitProgramm;
-use antarus66\BAHomework3\Recipe\Components\Creators\ComponentCreator;
-use antarus66\BAHomework3\Recipe\RecipeBuilder;
-use antarus66\BAHomework3\Recipe\Repositories\LocalRecipesRepository;
-use antarus66\BAHomework3\Recipe\Components\Creators\IngredientCreator;
+use antarus66\BAHomework3\Models\Recipe\Components\Creators\ComponentCreator;
+use antarus66\BAHomework3\Models\Recipe\RecipeBuilder;
+use antarus66\BAHomework3\Models\Recipe\Repositories\LocalRecipesRepository;
+use antarus66\BAHomework3\Models\Recipe\Components\Creators\IngredientCreator;
+use antarus66\BAHomework3\Models\Recipe\Repositories\PDORecipesRepository;
 
-$container = new Pimple\Container();
+$container = new \Pimple\Container();
 
 $container['routes'] = [
     'make-coffee' => MakeCoffee::class,
@@ -53,8 +58,12 @@ $container['default_recipes'] = [
     'cappuccino' => ['espresso', 'milk', 'whipped_milk'],
 ];
 
+$container['config'] = function () {
+    return Config::getInstance();
+};
+
 $container['recipes_repository'] = function ($c) {
-    return new LocalRecipesRepository();
+    return new PDORecipesRepository($c['config']);
 };
 
 $container['component_creator'] = function ($c) {

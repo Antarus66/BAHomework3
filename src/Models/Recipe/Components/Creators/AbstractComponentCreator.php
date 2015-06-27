@@ -1,15 +1,15 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe\Components\Creators;
+namespace antarus66\BAHomework3\Models\Recipe\Components\Creators;
 
-use antarus66\BAHomework3\Recipe\Components\Ingredients\Chocolate;
-use antarus66\BAHomework3\Recipe\Components\Ingredients\Coffee;
-use antarus66\BAHomework3\Recipe\Components\Ingredients\Milk;
-use antarus66\BAHomework3\Recipe\Components\Ingredients\Sugar;
-use antarus66\BAHomework3\Recipe\Components\Ingredients\Water;
-use antarus66\BAHomework3\Recipe\Components\Ingredients\WhippedCream;
-use antarus66\BAHomework3\Recipe\Components\Ingredients\WhippedMilk;
-use antarus66\BAHomework3\Recipe\Components\Ingredients\Whiskey;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients\Chocolate;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients\Coffee;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients\Milk;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients\Sugar;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients\Water;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients\WhippedCream;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients\WhippedMilk;
+use antarus66\BAHomework3\Models\Recipe\Components\Ingredients\Whiskey;
 
 abstract class AbstractComponentCreator
 {

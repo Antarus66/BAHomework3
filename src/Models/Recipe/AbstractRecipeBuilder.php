@@ -1,6 +1,6 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe;
+namespace antarus66\BAHomework3\Models\Recipe;
 
 abstract class AbstractRecipeBuilder
 {

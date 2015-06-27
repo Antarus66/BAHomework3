@@ -1,6 +1,6 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe\Repositories;
+namespace antarus66\BAHomework3\Models\Recipe\Repositories;
 
 abstract class AbstractRecipesRepository
 {

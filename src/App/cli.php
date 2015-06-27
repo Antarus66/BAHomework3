@@ -3,19 +3,22 @@
 /**
  * CoffeeMaker console bootstrap file.
  */
-require __DIR__ . '/../vendor/autoload.php';
 
-use antarus66\BAHomework3\Application;
+namespace antarus66\BAHomework3\App;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+use antarus66\BAHomework3\App\Application;
 use antarus66\BAHomework3\Commands\MakeCoffee;
 use antarus66\BAHomework3\Commands\AddRecipe;
 use antarus66\BAHomework3\Commands\ShowHelp;
 use antarus66\BAHomework3\Commands\ExitProgramm;
-use antarus66\BAHomework3\Recipe\Components\Creators\ComponentCreator;
-use antarus66\BAHomework3\Recipe\RecipeBuilder;
-use antarus66\BAHomework3\Recipe\Repositories\LocalRecipesRepository;
-use antarus66\BAHomework3\Recipe\Components\Creators\IngredientCreator;
+use antarus66\BAHomework3\Models\Recipe\Components\Creators\ComponentCreator;
+use antarus66\BAHomework3\Models\Recipe\RecipeBuilder;
+use antarus66\BAHomework3\Models\Recipe\Repositories\LocalRecipesRepository;
+use antarus66\BAHomework3\Models\Recipe\Components\Creators\IngredientCreator;
 
-$container = new Pimple\Container();
+$container = new \Pimple\Container();
 
 $container['routes'] = [
     'make-coffee' => MakeCoffee::class,

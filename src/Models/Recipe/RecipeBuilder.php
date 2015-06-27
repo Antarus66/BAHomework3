@@ -1,8 +1,8 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe;
+namespace antarus66\BAHomework3\Models\Recipe;
 
- use antarus66\BAHomework3\Recipe\Components\Creators\AbstractComponentCreator;
+ use antarus66\BAHomework3\Models\Recipe\Components\Creators\AbstractComponentCreator;
 
  class RecipeBuilder extends AbstractRecipeBuilder
  {

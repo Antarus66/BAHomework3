@@ -1,6 +1,6 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe\Components;
+namespace antarus66\BAHomework3\Models\Recipe\Components;
 
 /*
  * Defines a behavior for the components of recipe for defining a flat list of allowed

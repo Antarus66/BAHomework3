@@ -6,7 +6,7 @@
  * Time: 8:30 PM
  */
 
-namespace antarus66\BAHomework3\Recipe\Repositories;
+namespace antarus66\BAHomework3\Models\Recipe\Repositories;
 
 
 class PDORecipesRepository extends AbstractRecipesRepository{

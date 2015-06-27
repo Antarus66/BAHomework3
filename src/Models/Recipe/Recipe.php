@@ -1,8 +1,8 @@
 <?php
 
-namespace antarus66\BAHomework3\Recipe;
+namespace antarus66\BAHomework3\Models\Recipe;
 
-use antarus66\BAHomework3\Recipe\Components\RecipeComponent;
+use antarus66\BAHomework3\Models\Recipe\Components\RecipeComponent;
 
 class Recipe implements RecipeComponent
 {

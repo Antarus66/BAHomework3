@@ -2,10 +2,10 @@
 
 namespace antarus66\BAHomework3\Commands;
 
-use antarus66\BAHomework3\CoffeeDrink;
+use antarus66\BAHomework3\Models\CoffeeDrink;
 use antarus66\BAHomework3\Exceptions\CommandException;
 use antarus66\BAHomework3\Exceptions\RepositoryException;
-use antarus66\BAHomework3\Recipe\Repositories\AbstractRecipesRepository;
+use antarus66\BAHomework3\Models\Recipe\Repositories\AbstractRecipesRepository;
 
 class MakeCoffee extends Command
 {

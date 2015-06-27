@@ -1,6 +1,6 @@
 <?php
 
-namespace antarus66\BAHomework3;
+namespace antarus66\BAHomework3\Models;
 
 class CoffeeDrink
 {

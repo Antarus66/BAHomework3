@@ -1,6 +1,6 @@
 <?php
 
-namespace antarus66\BAHomework3;
+namespace antarus66\BAHomework3\App;
 
 use antarus66\BAHomework3\Exceptions\CLIException;
 use antarus66\BAHomework3\Exceptions\CommandException;

@@ -4,6 +4,7 @@ namespace antarus66\BAHomework3\App;
 
 use antarus66\BAHomework3\Exceptions\CLIException;
 use antarus66\BAHomework3\Exceptions\CommandException;
+use antarus66\BAHomework3\Exceptions\RepositoryException;
 
 class Application
 {
@@ -88,7 +89,16 @@ class Application
 
         foreach ($this->di_container['default_recipes'] as $name => $component_name_list) {
             $new_rec = $recipe_builder->makeRecipe($name, $component_name_list);
-           $recipe_repository->addRecipe($new_rec);
+
+            /*
+             * If we can't save a new recipes because it exists, we break the init.
+             */
+            try {
+                $recipe_repository->addRecipe($new_rec);
+            } catch (RepositoryException $e) {
+                break;
+            }
+
         }
     }
 }
